@@ -168,3 +168,83 @@ nav button {
 
     cursor: pointer;
 }
+
+/* ===== FINAL 3D SCENE OVERRIDES ===== */
+
+body {
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.space {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 110px;
+
+    perspective: 1000px;
+    transform-style: preserve-3d;
+
+    transform-origin: center center;
+
+    will-change: transform;
+}
+
+
+/* make the whole composition bigger */
+
+.profile-card {
+    width: 460px;
+
+    transform:
+        translateZ(-100px)
+        rotateY(18deg)
+        rotateZ(2deg);
+}
+
+.center-card {
+    width: 240px;
+
+    transform:
+        translateZ(120px);
+}
+
+.links-card {
+    width: 360px;
+
+    transform:
+        translateZ(-100px)
+        rotateY(-18deg)
+        rotateZ(-2deg);
+}
+
+
+/* IMPORTANT:
+   don't let the old hover rules replace our transforms
+*/
+
+.profile-card:hover {
+    transform:
+        translateZ(-70px)
+        rotateY(18deg)
+        rotateZ(2deg)
+        scale(1.04);
+}
+
+.center-card:hover {
+    transform:
+        translateZ(150px)
+        scale(1.04);
+}
+
+.links-card:hover {
+    transform:
+        translateZ(-70px)
+        rotateY(-18deg)
+        rotateZ(-2deg)
+        scale(1.04);
+}
