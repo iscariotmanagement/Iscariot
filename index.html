@@ -301,6 +301,33 @@ volumeTrack.addEventListener("click", function (event) {
 
     updateVolume();
 });
+    /* PANEL / NAV HOVER */
+
+const profileCard = document.querySelector(".profile-card");
+const musicCard = document.querySelector(".center-card");
+const linksCard = document.querySelector(".links-card");
+
+const profileNav = document.getElementById("profile-nav");
+const musicNav = document.getElementById("music-nav");
+const linksNav = document.getElementById("links-nav");
+
+
+function connectPanel(card, button) {
+
+    card.addEventListener("mouseenter", function () {
+        button.classList.add("panel-active");
+    });
+
+    card.addEventListener("mouseleave", function () {
+        button.classList.remove("panel-active");
+    });
+
+}
+
+
+connectPanel(profileCard, profileNav);
+connectPanel(musicCard, musicNav);
+connectPanel(linksCard, linksNav);
 </script>
 
 </body>
