@@ -301,33 +301,29 @@ volumeTrack.addEventListener("click", function (event) {
 
     updateVolume();
 });
-    /* PANEL / NAV HOVER */
+/* PANEL / NAV HOVER */
 
-const profileCard = document.querySelector(".profile-card");
-const musicCard = document.querySelector(".center-card");
-const linksCard = document.querySelector(".links-card");
+const panelPairs = [
+    [document.querySelector(".profile-card"), document.getElementById("profile-nav")],
+    [document.querySelector(".center-card"), document.getElementById("music-nav")],
+    [document.querySelector(".links-card"), document.getElementById("links-nav")]
+];
 
-const profileNav = document.getElementById("profile-nav");
-const musicNav = document.getElementById("music-nav");
-const linksNav = document.getElementById("links-nav");
-
-
-function connectPanel(card, button) {
+panelPairs.forEach(function ([card, button]) {
 
     card.addEventListener("mouseenter", function () {
-        button.classList.add("panel-active");
+        button.style.background = "#eeeeee";
+        button.style.borderColor = "#eeeeee";
+        button.style.color = "#111111";
     });
 
     card.addEventListener("mouseleave", function () {
-        button.classList.remove("panel-active");
+        button.style.background = "#111111";
+        button.style.borderColor = "#333333";
+        button.style.color = "#aaaaaa";
     });
 
-}
-
-
-connectPanel(profileCard, profileNav);
-connectPanel(musicCard, musicNav);
-connectPanel(linksCard, linksNav);
+});
 </script>
 
 </body>
