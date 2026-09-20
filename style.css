@@ -218,7 +218,7 @@ body {
 
     transform:
         translateZ(0px)
-        rotateY(-18deg)
+        rotateY(18deg)
         rotateZ(1deg);
 }
 
@@ -234,7 +234,7 @@ body {
 
     transform:
         translateZ(0px)
-        rotateY(18deg)
+        rotateY(-18deg)
         rotateZ(-1deg);
 }
 
