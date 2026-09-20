@@ -724,3 +724,8 @@ nav button:hover {
 
     text-align: right;
 }
+nav button.panel-active {
+    background: #eeeeee;
+    border-color: #eeeeee;
+    color: #111111;
+}
