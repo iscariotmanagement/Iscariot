@@ -578,19 +578,14 @@ nav button:hover {
     }
 }
 /* ========================================
-   BACKGROUND DUST
+   MOVING BACKGROUND DUST
    ======================================== */
 
 .dust {
     position: fixed;
-    inset: 0;
-
-    width: 100vw;
-    height: 100vh;
+    inset: -100px;
 
     pointer-events: none;
-    overflow: hidden;
-
     z-index: -1;
 
     background-image:
@@ -609,4 +604,25 @@ nav button:hover {
         151px 59px;
 
     opacity: 0.55;
+
+    animation: dustDrift 35s linear infinite;
+
+    will-change: background-position;
+}
+
+@keyframes dustDrift {
+
+    from {
+        background-position:
+            17px 31px,
+            83px 117px,
+            151px 59px;
+    }
+
+    to {
+        background-position:
+            190px 222px,
+            -168px 344px,
+            462px -224px;
+    }
 }
