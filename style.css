@@ -1,0 +1,579 @@
+/* ========================================
+   ISCAriot — CLEAN STYLESHEET
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #0c0c0c 0%,
+            #050505 48%,
+            #000000 100%
+        );
+
+    color: #eeeeee;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* ========================================
+   3D SCENE
+   ======================================== */
+
+.space {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 85px;
+
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+
+    transform-style: preserve-3d;
+    transform-origin: center center;
+
+    will-change: transform;
+}
+
+
+/* ========================================
+   SHARED CARD DESIGN
+   ======================================== */
+
+.card {
+    flex-shrink: 0;
+
+    background: rgba(8, 8, 8, 0.96);
+
+    border: 1px solid #333;
+    border-radius: 7px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.85),
+        0 0 25px rgba(255, 255, 255, 0.02);
+
+    transform-style: preserve-3d;
+    will-change: transform;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.card:hover {
+    border-color: #555;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.9),
+        0 0 30px rgba(255, 255, 255, 0.04);
+}
+
+
+/* ========================================
+   LEFT — PROFILE
+   ======================================== */
+
+.profile-card {
+    width: 390px;
+    padding: 20px;
+
+    /* faces toward center */
+    transform:
+        rotateY(16deg)
+        rotateZ(1deg);
+}
+
+.profile-card:hover {
+    transform:
+        translateZ(30px)
+        rotateY(16deg)
+        rotateZ(1deg)
+        scale(1.025);
+}
+
+.profile-card h1 {
+    margin: 6px 0 22px;
+
+    font-size: 42px;
+    line-height: 1;
+
+    letter-spacing: -1px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
+.profile h2 {
+    margin: 0 0 5px;
+
+    font-size: 15px;
+}
+
+.profile p {
+    margin: 3px 0;
+
+    font-size: 11px;
+}
+
+.pfp {
+    width: 62px;
+    height: 62px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 40% 35%,
+            #eeeeee,
+            #777777 40%,
+            #111111 75%
+        );
+}
+
+.tiny {
+    margin: 0;
+
+    color: #999;
+
+    font-size: 9px;
+}
+
+.muted {
+    color: #777;
+}
+
+
+/* ========================================
+   CENTER — MUSIC PLAYER
+   ======================================== */
+
+.center-card {
+    width: 280px;
+    padding: 12px;
+
+    /* SAME DEPTH as other cards */
+    transform: translateZ(0);
+}
+
+.center-card:hover {
+    transform:
+        translateZ(30px)
+        scale(1.025);
+}
+
+.player-label {
+    margin: 2px 0 10px;
+
+    color: #dddddd;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+/* ALBUM ART */
+
+.album-cover {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    background: #111;
+
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+
+.album-cover img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* SONG INFO */
+
+.song-info {
+    margin-top: 11px;
+}
+
+.song-info h2 {
+    margin: 0 0 3px;
+
+    color: #eeeeee;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-info p {
+    margin: 0;
+
+    color: #aaaaaa;
+
+    font-size: 11px;
+}
+
+
+/* SONG PROGRESS */
+
+.song-progress {
+    position: relative;
+
+    width: 100%;
+    height: 3px;
+
+    margin-top: 11px;
+
+    background: #393939;
+}
+
+.song-progress-fill {
+    width: 14%;
+    height: 100%;
+
+    background: #eeeeee;
+}
+
+.song-progress-knob {
+    position: absolute;
+
+    top: 50%;
+    left: 14%;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #eeeeee;
+
+    transform: translate(-50%, -50%);
+
+    box-shadow:
+        0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+.timestamps {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 6px;
+
+    color: #999999;
+
+    font-size: 9px;
+}
+
+
+/* MAIN CONTROLS */
+
+.main-controls {
+    display: grid;
+
+    grid-template-columns: 38px 1fr 38px;
+
+    gap: 7px;
+
+    margin-top: 9px;
+}
+
+.main-controls button,
+.secondary-controls button {
+    border: 1px solid #3a3a3a;
+    border-radius: 5px;
+
+    background: #111111;
+    color: #dddddd;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.main-controls button {
+    height: 35px;
+}
+
+.main-controls button:hover,
+.secondary-controls button:hover {
+    background: #1d1d1d;
+    border-color: #666;
+}
+
+.main-controls .pause {
+    background: #eeeeee;
+    color: #111111;
+}
+
+.main-controls .pause:hover {
+    background: #ffffff;
+}
+
+
+/* SHUFFLE + REPEAT */
+
+.secondary-controls {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 7px;
+
+    margin-top: 7px;
+}
+
+.secondary-controls button {
+    height: 29px;
+
+    font-size: 14px;
+}
+
+
+/* VOLUME */
+
+.volume {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 11px;
+
+    color: #999999;
+
+    font-size: 10px;
+}
+
+.volume-track {
+    position: relative;
+
+    flex: 1;
+
+    height: 3px;
+
+    background: #333333;
+}
+
+.volume-fill {
+    width: 12%;
+    height: 100%;
+
+    background: #dddddd;
+}
+
+.volume-knob {
+    position: absolute;
+
+    top: 50%;
+    left: 12%;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #eeeeee;
+
+    transform: translate(-50%, -50%);
+
+    box-shadow:
+        0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+
+/* ========================================
+   RIGHT — LINKS
+   ======================================== */
+
+.links-card {
+    width: 300px;
+    padding: 16px;
+
+    /* faces toward center */
+    transform:
+        rotateY(-16deg)
+        rotateZ(-1deg);
+}
+
+.links-card:hover {
+    transform:
+        translateZ(30px)
+        rotateY(-16deg)
+        rotateZ(-1deg)
+        scale(1.025);
+}
+
+.links {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 6px;
+
+    margin-top: 10px;
+}
+
+.links a {
+    display: block;
+
+    padding: 12px 10px;
+
+    border: 1px solid #292929;
+    border-radius: 4px;
+
+    background: #151515;
+
+    color: #aaaaaa;
+
+    font-size: 11px;
+
+    text-decoration: none;
+
+    transition:
+        color 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.links a:hover {
+    background: #222222;
+
+    border-color: #555555;
+
+    color: #ffffff;
+}
+
+
+/* ========================================
+   BOTTOM NAVIGATION
+   ======================================== */
+
+nav {
+    position: fixed;
+
+    z-index: 100;
+
+    bottom: 28px;
+    left: 50%;
+
+    display: flex;
+
+    gap: 5px;
+
+    padding: 6px;
+
+    border: 1px solid #333;
+    border-radius: 30px;
+
+    background: rgba(10, 10, 10, 0.9);
+
+    transform: translateX(-50%);
+
+    backdrop-filter: blur(10px);
+}
+
+nav button {
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+
+    border: 1px solid #333;
+    border-radius: 50%;
+
+    background: #111111;
+    color: #aaaaaa;
+
+    cursor: pointer;
+
+    transition:
+        color 0.15s ease,
+        border-color 0.15s ease,
+        background 0.15s ease;
+}
+
+nav button:hover {
+    background: #191919;
+
+    border-color: #666;
+
+    color: #ffffff;
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 900px) {
+
+    body {
+        overflow-y: auto;
+    }
+
+    .space {
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+
+        flex-direction: column;
+
+        gap: 30px;
+
+        padding:
+            60px 20px
+            120px;
+    }
+
+    .profile-card,
+    .center-card,
+    .links-card {
+        width: min(100%, 360px);
+
+        transform: none;
+    }
+
+    .profile-card:hover,
+    .center-card:hover,
+    .links-card:hover {
+        transform: scale(1.015);
+    }
+}
