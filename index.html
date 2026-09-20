@@ -63,10 +63,10 @@
 
             <div class="album-cover">
 
-                <img
-                    src="assets/cover.jpg"
-                    alt="Album cover"
-                >
+<img
+    src="assets/covers/Songs about leaving cover.png"
+    alt="Songs about leaving cover"
+>
 
             </div>
 
@@ -205,7 +205,9 @@
     const progressBar = document.querySelector(".song-progress");
     const progressFill = document.querySelector(".song-progress-fill");
     const progressKnob = document.querySelector(".song-progress-knob");
-
+    const volumeTrack = document.querySelector(".volume-track");
+    const volumeFill = document.querySelector(".volume-fill");
+    const volumeKnob = document.querySelector(".volume-knob");
 
     /* PLAY / PAUSE */
 
@@ -276,6 +278,33 @@
         audioPlayer.currentTime =
             clickPosition * audioPlayer.duration;
     });
+    /* VOLUME */
+
+audioPlayer.volume = 0.5;
+
+function updateVolume() {
+    const volumePercent = audioPlayer.volume * 100;
+
+    volumeFill.style.width = volumePercent + "%";
+    volumeKnob.style.left = volumePercent + "%";
+}
+
+updateVolume();
+
+
+volumeTrack.addEventListener("click", function (event) {
+
+    const bar = volumeTrack.getBoundingClientRect();
+
+    let volume =
+        (event.clientX - bar.left) / bar.width;
+
+    volume = Math.max(0, Math.min(1, volume));
+
+    audioPlayer.volume = volume;
+
+    updateVolume();
+});
 </script>
 
 </body>
