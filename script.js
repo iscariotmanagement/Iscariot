@@ -1,25 +1,32 @@
 const scene = document.querySelector(".space");
 
-let mouseX = 0;
-let mouseY = 0;
+let targetX = 0;
+let targetY = 0;
 
 let currentX = 0;
 let currentY = 0;
 
-window.addEventListener("mousemove", (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+window.addEventListener("mousemove", (event) => {
+
+    // mouse position from -1 to +1
+    targetX = (event.clientX / window.innerWidth - 0.5) * 2;
+    targetY = (event.clientY / window.innerHeight - 0.5) * 2;
+
 });
 
 function animate() {
-    // smooth movement
-    currentX += (mouseX - currentX) * 0.05;
-    currentY += (mouseY - currentY) * 0.05;
 
-    // rotate the WHOLE environment
-    scene.style.transform =
-        `rotateX(${currentY * -5}deg)
-         rotateY(${currentX * 8}deg)`;
+    // smooth interpolation
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
+
+    // Move the entire 3D world opposite the cursor
+    scene.style.transform = `
+        rotateX(${currentY * -7}deg)
+        rotateY(${currentX * 11}deg)
+        translateX(${currentX * -18}px)
+        translateY(${currentY * -10}px)
+    `;
 
     requestAnimationFrame(animate);
 }
