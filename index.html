@@ -139,6 +139,8 @@
 
             </div>
 
+            <audio id="audio-player" src="assets/Songs about leaving.mp3"></audio>
+
         </section>
 
 
@@ -190,6 +192,21 @@
 
 
     <script src="script.js"></script>
+    
+    <script>
+    const audioPlayer = document.getElementById("audio-player");
+    const playButton = document.getElementById("play-button");
+
+    playButton.addEventListener("click", function () {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            playButton.textContent = "Ⅱ";
+        } else {
+            audioPlayer.pause();
+            playButton.textContent = "▶";
+        }
+    });
+</script>
 
 </body>
 
