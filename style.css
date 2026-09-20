@@ -1,5 +1,5 @@
 /* ========================================
-   ISCAriot — CLEAN STYLESHEET
+   Iscariot Style Sheet
    ======================================== */
 
 * {
@@ -594,9 +594,9 @@ nav button:hover {
         radial-gradient(circle, rgba(255,255,255,.15) 0 1px, transparent 1.2px);
 
     background-size:
-        173px 191px,
-        251px 227px,
-        311px 283px;
+        300px 340px,
+        420px 390px,
+        520px 470px;
 
     background-position:
         17px 31px,
