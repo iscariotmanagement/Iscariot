@@ -199,12 +199,82 @@
     const audioPlayer = document.getElementById("audio-player");
     const playButton = document.getElementById("play-button");
 
+    const currentTimeDisplay = document.getElementById("current-time");
+    const durationDisplay = document.getElementById("duration");
+
+    const progressBar = document.querySelector(".song-progress");
+    const progressFill = document.querySelector(".song-progress-fill");
+    const progressKnob = document.querySelector(".song-progress-knob");
+
+
+    /* PLAY / PAUSE */
+
     playButton.addEventListener("click", function () {
         if (audioPlayer.paused) {
             audioPlayer.play();
         } else {
             audioPlayer.pause();
         }
+    });
+
+
+    /* FORMAT SECONDS AS 0:00 */
+
+    function formatTime(seconds) {
+        if (!Number.isFinite(seconds)) {
+            return "0:00";
+        }
+
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60)
+            .toString()
+            .padStart(2, "0");
+
+        return `${minutes}:${remainingSeconds}`;
+    }
+
+
+    /* GET REAL SONG LENGTH */
+
+    audioPlayer.addEventListener("loadedmetadata", function () {
+        durationDisplay.textContent = formatTime(audioPlayer.duration);
+    });
+
+
+    /* UPDATE TIME + PROGRESS BAR */
+
+    audioPlayer.addEventListener("timeupdate", function () {
+
+        currentTimeDisplay.textContent =
+            formatTime(audioPlayer.currentTime);
+
+        if (!audioPlayer.duration) {
+            return;
+        }
+
+        const progress =
+            (audioPlayer.currentTime / audioPlayer.duration) * 100;
+
+        progressFill.style.width = progress + "%";
+        progressKnob.style.left = progress + "%";
+    });
+
+
+    /* CLICK PROGRESS BAR TO SKIP */
+
+    progressBar.addEventListener("click", function (event) {
+
+        if (!audioPlayer.duration) {
+            return;
+        }
+
+        const bar = progressBar.getBoundingClientRect();
+
+        const clickPosition =
+            (event.clientX - bar.left) / bar.width;
+
+        audioPlayer.currentTime =
+            clickPosition * audioPlayer.duration;
     });
 </script>
 
