@@ -172,8 +172,24 @@ nav button {
 /* ===== FINAL 3D SCENE OVERRIDES ===== */
 
 body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
-    perspective: 1000px;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #0b0b0b 0%,
+            #050505 45%,
+            #000000 100%
+        );
+
+    color: #eeeeee;
+
+    font-family:
+        "Courier New",
+        monospace;
 }
 
 .space {
