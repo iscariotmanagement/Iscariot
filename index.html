@@ -106,7 +106,7 @@
 
         <div class="main-controls">
             <button>◀</button>
-            <button class="pause">▶</button>
+            <button class="pause" id="play-button">▶</button>
             <button>▷</button>
         </div>
 
@@ -193,17 +193,15 @@
 
     <script src="script.js"></script>
     
-    <script>
+<script>
     const audioPlayer = document.getElementById("audio-player");
     const playButton = document.getElementById("play-button");
 
     playButton.addEventListener("click", function () {
         if (audioPlayer.paused) {
             audioPlayer.play();
-            playButton.textContent = "Ⅱ";
         } else {
             audioPlayer.pause();
-            playButton.textContent = "▶";
         }
     });
 </script>
