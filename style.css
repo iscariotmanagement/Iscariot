@@ -577,3 +577,36 @@ nav button:hover {
         transform: scale(1.015);
     }
 }
+/* ========================================
+   BACKGROUND DUST
+   ======================================== */
+
+.dust {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    pointer-events: none;
+    overflow: hidden;
+
+    z-index: -1;
+
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,.45) 0 1px, transparent 1.2px),
+        radial-gradient(circle, rgba(255,255,255,.25) 0 1px, transparent 1.2px),
+        radial-gradient(circle, rgba(255,255,255,.15) 0 1px, transparent 1.2px);
+
+    background-size:
+        173px 191px,
+        251px 227px,
+        311px 283px;
+
+    background-position:
+        17px 31px,
+        83px 117px,
+        151px 59px;
+
+    opacity: 0.55;
+}
