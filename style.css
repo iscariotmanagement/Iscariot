@@ -494,3 +494,52 @@ body {
 
     box-shadow: 0 0 6px rgba(255,255,255,.4);
 }
+/* ===== FIX CARD ORIENTATION ===== */
+
+/* LEFT — faces inward */
+.profile-card {
+    transform:
+        translateZ(0px)
+        rotateY(18deg)
+        rotateZ(1deg) !important;
+}
+
+/* LEFT HOVER — same direction, just comes forward */
+.profile-card:hover {
+    transform:
+        translateZ(35px)
+        rotateY(18deg)
+        rotateZ(1deg)
+        scale(1.03) !important;
+}
+
+
+/* CENTER */
+.center-card {
+    transform:
+        translateZ(0px) !important;
+}
+
+.center-card:hover {
+    transform:
+        translateZ(35px)
+        scale(1.03) !important;
+}
+
+
+/* RIGHT — faces inward */
+.links-card {
+    transform:
+        translateZ(0px)
+        rotateY(-18deg)
+        rotateZ(-1deg) !important;
+}
+
+/* RIGHT HOVER — same direction */
+.links-card:hover {
+    transform:
+        translateZ(35px)
+        rotateY(-18deg)
+        rotateZ(-1deg)
+        scale(1.03) !important;
+}
