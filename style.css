@@ -214,28 +214,28 @@ body {
 /* make the whole composition bigger */
 
 .profile-card {
-    width: 460px;
+    width: 430px;
 
     transform:
-        translateZ(-100px)
-        rotateY(18deg)
-        rotateZ(2deg);
+        translateZ(0px)
+        rotateY(-18deg)
+        rotateZ(1deg);
 }
 
 .center-card {
-    width: 240px;
+    width: 220px;
 
     transform:
-        translateZ(120px);
+        translateZ(0px);
 }
 
 .links-card {
-    width: 360px;
+    width: 330px;
 
     transform:
-        translateZ(-100px)
-        rotateY(-18deg)
-        rotateZ(-2deg);
+        translateZ(0px)
+        rotateY(18deg)
+        rotateZ(-1deg);
 }
 
 
