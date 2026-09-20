@@ -729,3 +729,12 @@ nav button.panel-active {
     border-color: #eeeeee;
     color: #111111;
 }
+/* PANEL HOVER -> BOTTOM NAV */
+
+body:has(.profile-card:hover) #profile-nav,
+body:has(.center-card:hover) #music-nav,
+body:has(.links-card:hover) #links-nav {
+    background: #eeeeee !important;
+    border-color: #eeeeee !important;
+    color: #111111 !important;
+}
