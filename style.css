@@ -605,7 +605,9 @@ nav button:hover {
 
     opacity: 0.55;
 
-    animation: dustDrift 35s linear infinite;
+   animation: dustDrift 35s linear infinite;
+   animation-delay: -17s;
+   animation-fill-mode: both;
 
     will-change: background-position;
 }
