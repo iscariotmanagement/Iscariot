@@ -196,18 +196,55 @@
     const audioPlayer = document.getElementById("audio-player");
     const playButton = document.getElementById("play-button");
 
+    const songTitle = document.getElementById("song-title");
+    const songArtist = document.getElementById("song-artist");
+
     const currentTimeDisplay = document.getElementById("current-time");
     const durationDisplay = document.getElementById("duration");
 
     const progressBar = document.querySelector(".song-progress");
     const progressFill = document.querySelector(".song-progress-fill");
     const progressKnob = document.querySelector(".song-progress-knob");
+
     const volumeTrack = document.querySelector(".volume-track");
     const volumeFill = document.querySelector(".volume-fill");
     const volumeKnob = document.querySelector(".volume-knob");
 
-    /* PLAY / PAUSE */
+    const controlButtons = document.querySelectorAll(".main-controls button");
+    const previousButton = controlButtons[0];
+    const nextButton = controlButtons[2];
 
+    /* PLAYLIST */
+    const playlist = [
+        {
+            title: "Songs about leaving",
+            artist: "Jane Remover",
+            file: "assets/music/songs-about-leaving.mp3"
+        },
+        {
+            title: "Death of Pride",
+            artist: "Venturing",
+            file: "assets/music/death-of-pride.mp3"
+        }
+    ];
+
+    let currentSong = 0;
+
+    function loadSong(index, playImmediately = false) {
+        currentSong = index;
+
+        audioPlayer.src = playlist[index].file;
+        songTitle.textContent = playlist[index].title;
+        songArtist.textContent = playlist[index].artist;
+
+        audioPlayer.load();
+
+        if (playImmediately) {
+            audioPlayer.play();
+        }
+    }
+
+    /* PLAY / PAUSE */
     playButton.addEventListener("click", function () {
         if (audioPlayer.paused) {
             audioPlayer.play();
@@ -216,9 +253,38 @@
         }
     });
 
+    /* NEXT */
+    nextButton.addEventListener("click", function () {
+        const nextSong = (currentSong + 1) % playlist.length;
+        loadSong(nextSong, true);
+    });
 
-    /* FORMAT SECONDS AS 0:00 */
+    /* PREVIOUS */
+    previousButton.addEventListener("click", function () {
+        const previousSong =
+            (currentSong - 1 + playlist.length) % playlist.length;
 
+        loadSong(previousSong, true);
+    });
+
+    /* WHEN SONG ENDS, PLAY NEXT */
+    audioPlayer.addEventListener("ended", function () {
+        const nextSong = (currentSong + 1) % playlist.length;
+        loadSong(nextSong, true);
+    });
+
+    /* START MUSIC ON FIRST CLICK ANYWHERE */
+    function startMusic() {
+        if (audioPlayer.paused) {
+            audioPlayer.play().catch(function () {});
+        }
+
+        document.removeEventListener("click", startMusic);
+    }
+
+    document.addEventListener("click", startMusic);
+
+    /* FORMAT TIME */
     function formatTime(seconds) {
         if (!Number.isFinite(seconds)) {
             return "0:00";
@@ -232,18 +298,13 @@
         return `${minutes}:${remainingSeconds}`;
     }
 
-
-    /* GET REAL SONG LENGTH */
-
+    /* SONG LENGTH */
     audioPlayer.addEventListener("loadedmetadata", function () {
         durationDisplay.textContent = formatTime(audioPlayer.duration);
     });
 
-
-    /* UPDATE TIME + PROGRESS BAR */
-
+    /* PROGRESS */
     audioPlayer.addEventListener("timeupdate", function () {
-
         currentTimeDisplay.textContent =
             formatTime(audioPlayer.currentTime);
 
@@ -258,11 +319,8 @@
         progressKnob.style.left = progress + "%";
     });
 
-
-    /* CLICK PROGRESS BAR TO SKIP */
-
+    /* CLICK PROGRESS BAR */
     progressBar.addEventListener("click", function (event) {
-
         if (!audioPlayer.duration) {
             return;
         }
@@ -275,56 +333,57 @@
         audioPlayer.currentTime =
             clickPosition * audioPlayer.duration;
     });
+
     /* VOLUME */
+    audioPlayer.volume = 0.5;
 
-audioPlayer.volume = 0.5;
+    function updateVolume() {
+        const volumePercent = audioPlayer.volume * 100;
 
-function updateVolume() {
-    const volumePercent = audioPlayer.volume * 100;
-
-    volumeFill.style.width = volumePercent + "%";
-    volumeKnob.style.left = volumePercent + "%";
-}
-
-updateVolume();
-
-
-volumeTrack.addEventListener("click", function (event) {
-
-    const bar = volumeTrack.getBoundingClientRect();
-
-    let volume =
-        (event.clientX - bar.left) / bar.width;
-
-    volume = Math.max(0, Math.min(1, volume));
-
-    audioPlayer.volume = volume;
+        volumeFill.style.width = volumePercent + "%";
+        volumeKnob.style.left = volumePercent + "%";
+    }
 
     updateVolume();
-});
-/* PANEL / NAV HOVER */
 
-const panelPairs = [
-    [document.querySelector(".profile-card"), document.getElementById("profile-nav")],
-    [document.querySelector(".center-card"), document.getElementById("music-nav")],
-    [document.querySelector(".links-card"), document.getElementById("links-nav")]
-];
+    volumeTrack.addEventListener("click", function (event) {
+        const bar = volumeTrack.getBoundingClientRect();
 
-panelPairs.forEach(function ([card, button]) {
+        let volume =
+            (event.clientX - bar.left) / bar.width;
 
-    card.addEventListener("mouseenter", function () {
-        button.style.background = "#eeeeee";
-        button.style.borderColor = "#eeeeee";
-        button.style.color = "#111111";
+        volume = Math.max(0, Math.min(1, volume));
+
+        audioPlayer.volume = volume;
+
+        updateVolume();
     });
 
-    card.addEventListener("mouseleave", function () {
-        button.style.background = "#111111";
-        button.style.borderColor = "#333333";
-        button.style.color = "#aaaaaa";
-    });
+    /* PANEL / NAV HOVER */
+    const profileCard = document.querySelector(".profile-card");
+    const musicCard = document.querySelector(".center-card");
+    const linksCard = document.querySelector(".links-card");
 
-});
+    const profileNav = document.getElementById("profile-nav");
+    const musicNav = document.getElementById("music-nav");
+    const linksNav = document.getElementById("links-nav");
+
+    function connectPanel(card, button) {
+        card.addEventListener("mouseenter", function () {
+            button.classList.add("panel-active");
+        });
+
+        card.addEventListener("mouseleave", function () {
+            button.classList.remove("panel-active");
+        });
+    }
+
+    connectPanel(profileCard, profileNav);
+    connectPanel(musicCard, musicNav);
+    connectPanel(linksCard, linksNav);
+
+    /* LOAD FIRST SONG */
+    loadSong(0);
 </script>
 
 </body>
