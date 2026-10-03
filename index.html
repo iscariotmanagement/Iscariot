@@ -383,8 +383,13 @@
     connectPanel(linksCard, linksNav);
 
     /* LOAD FIRST SONG */
-    loadSong(0);
-</script>
+/* LOAD FIRST SONG + AUTOPLAY */
+loadSong(0);
+
+audioPlayer.play().catch(function () {
+    /* Browser blocked autoplay.
+       The existing first-click listener will start it instead. */
+});</script>
 
 </body>
 
