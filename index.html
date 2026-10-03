@@ -274,16 +274,23 @@
     });
 
     /* START MUSIC ON FIRST CLICK ANYWHERE */
-    function startMusic() {
-        if (audioPlayer.paused) {
-            audioPlayer.play().catch(function () {});
-        }
-
-        document.removeEventListener("click", startMusic);
+  function startMusic() {
+    if (!audioPlayer.paused) {
+        return;
     }
 
-    document.addEventListener("click", startMusic);
+    audioPlayer.play().then(function () {
+        document.removeEventListener("click", startMusic);
+        document.removeEventListener("touchstart", startMusic);
+        document.removeEventListener("keydown", startMusic);
+    }).catch(function () {
+        /* Browser still hasn't allowed playback yet. */
+    });
+}
 
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
+document.addEventListener("keydown", startMusic);
     /* FORMAT TIME */
     function formatTime(seconds) {
         if (!Number.isFinite(seconds)) {
